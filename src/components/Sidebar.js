@@ -11,6 +11,9 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
+import genreIcons from '../assets/genres';
+
+import { useGetGenresQuery } from '../services/TMDB';
 
 const categories = [
   {
@@ -54,6 +57,7 @@ const redLogo =
 
 const Sidebar = ({ setMobileOpen }) => {
   const theme = useTheme();
+  const { data, isFetching } = useGetGenresQuery();
 
   return (
     <>
@@ -80,6 +84,9 @@ const Sidebar = ({ setMobileOpen }) => {
             }}
           >
             <ListItem button>
+              <ListItemIcon>
+                <img src={genreIcons[label.toLowerCase()]} height={30} />
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -88,20 +95,29 @@ const Sidebar = ({ setMobileOpen }) => {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {demoCategories.map(({ label, value }) => (
-          <Link
-            key={value}
-            to="/"
-            style={{
-              textDecoration: 'none',
-              color: theme.palette.text.primary,
-            }}
-          >
-            <ListItem button>
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
-        ))}
+        {isFetching ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        ) : (
+          data.genres.map(({ name, id }) => (
+            <Link
+              key={id}
+              to="/"
+              style={{
+                textDecoration: 'none',
+                color: theme.palette.text.primary,
+              }}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <img src={genreIcons[name.toLowerCase()]} height={30} />
+                </ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
+          ))
+        )}
       </List>
     </>
   );
