@@ -1,15 +1,15 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
   extends: ['plugin:react/recommended', 'airbnb'],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react'],
   rules: {
@@ -24,14 +24,14 @@ module.exports = {
       'error',
       {
         max: 1,
-        maxEOF: 1
-      }
+        maxEOF: 1,
+      },
     ],
     'no-underscore-dangle': [
       'error',
       {
-        allow: ['_d', '_dh', '_h', '_id', '_m', '_n', '_t', '_text']
-      }
+        allow: ['_d', '_dh', '_h', '_id', '_m', '_n', '_t', '_text'],
+      },
     ],
     'object-curly-newline': 0,
     'react/jsx-filename-extension': 0,
@@ -46,8 +46,12 @@ module.exports = {
       {
         components: ['Link'],
         specialLink: ['to', 'hrefLeft', 'hrefRight'],
-        aspects: ['noHref', 'invalidHref', 'preferButton']
-      }
-    ]
-  }
+        aspects: ['noHref', 'invalidHref', 'preferButton'],
+      },
+    ],
+    "react/function-component-definition": [<enabled>, {
+      "namedComponents": "function-declaration" | "function-expression" | "arrow-function" | Array<"function-declaration" | "function-expression" | "arrow-function">,
+      "unnamedComponents": "function-expression" | "arrow-function" | Array<"function-expression" | "arrow-function">
+    }],
+  },
 };
