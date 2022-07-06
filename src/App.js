@@ -1,11 +1,11 @@
 import { CssBaseline, Box } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 
-import Actors from './components/Actors';
-import Movies from './components/Movies';
-import MovieInfo from './components/MovieInfo';
+import Actors from './pages/Actors';
+import Movies from './pages/Movies';
+import MovieInfo from './pages/MovieInfo';
 import NavBar from './components/NavBar';
-import Profile from './components/Profile';
+import Profile from './pages/Profile';
 
 const App = () => (
   <Box component="div" sx={{ display: 'flex', height: '100%' }}>
