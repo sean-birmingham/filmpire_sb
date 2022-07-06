@@ -47,6 +47,7 @@ const NavBar = () => {
               edge="start"
               style={{ outline: 'none' }}
               sx={{ mr: 2 }}
+              onClick={() => setMobileOpen((prevState) => !prevState)}
             >
               <Menu />
             </IconButton>
@@ -89,6 +90,7 @@ const NavBar = () => {
               variant="temporary"
               anchor="right"
               open={mobileOpen}
+              onClose={() => setMobileOpen((prevState) => !prevState)}
               ModalProps={{ keepMounted: true }}
               sx={{ width: 240 }}
             >
