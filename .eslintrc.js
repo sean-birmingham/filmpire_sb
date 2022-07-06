@@ -49,9 +49,12 @@ module.exports = {
         aspects: ['noHref', 'invalidHref', 'preferButton'],
       },
     ],
-    "react/function-component-definition": [<enabled>, {
-      "namedComponents": "function-declaration" | "function-expression" | "arrow-function" | Array<"function-declaration" | "function-expression" | "arrow-function">,
-      "unnamedComponents": "function-expression" | "arrow-function" | Array<"function-expression" | "arrow-function">
-    }],
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
 };
