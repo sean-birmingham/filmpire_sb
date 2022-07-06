@@ -11,7 +11,7 @@ const App = () => (
   <Box component="div" sx={{ display: 'flex', height: '100%' }}>
     <CssBaseline />
     <NavBar />
-    <Box component="main" sx={{ flexGrow: '1', padding: '2em' }}>
+    <Box component="main" sx={{ flexGrow: 1, padding: '2em' }}>
       <Box component="div" sx={{ height: '70px' }} />
       <Routes>
         <Route path="/" element={<Movies />} />
