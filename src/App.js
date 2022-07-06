@@ -1,4 +1,4 @@
-import { CssBaseline, Box } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 
 import Actors from './pages/Actors';
@@ -7,20 +7,22 @@ import MovieInfo from './pages/MovieInfo';
 import NavBar from './components/NavBar';
 import Profile from './pages/Profile';
 
+import './App.css';
+
 const App = () => (
-  <Box component="div" sx={{ display: 'flex', height: '100%' }}>
+  <div style={{ display: 'flex', height: '100%' }}>
     <CssBaseline />
     <NavBar />
-    <Box component="main" sx={{ flexGrow: 1, padding: '2em' }}>
-      <Box component="div" sx={{ height: '70px' }} />
+    <main style={{ flexGrow: 1, padding: '2em' }}>
+      <div style={{ height: '70px' }} />
       <Routes>
         <Route path="/" element={<Movies />} />
         <Route path="/movie/:id" element={<MovieInfo />} />
         <Route path="/actors/:id" element={<Actors />} />
         <Route path="/profile/:id" element={<Profile />} />
       </Routes>
-    </Box>
-  </Box>
+    </main>
+  </div>
 );
 
 export default App;

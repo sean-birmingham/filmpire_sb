@@ -19,6 +19,8 @@ import { useTheme } from '@mui/system';
 
 import Sidebar from './Sidebar';
 
+const drawerWidth = 240;
+
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -92,12 +94,23 @@ const NavBar = () => {
               open={mobileOpen}
               onClose={() => setMobileOpen((prevState) => !prevState)}
               ModalProps={{ keepMounted: true }}
-              sx={{ width: 240 }}
+              sx={{ width: drawerWidth }}
             >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ) : (
-            <Drawer variant="permanent" open>
+            <Drawer
+              variant="permanent"
+              open
+              sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                  width: drawerWidth,
+                  boxSizing: 'border-box',
+                },
+              }}
+            >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           )}
