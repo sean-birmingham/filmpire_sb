@@ -20,6 +20,7 @@ module.exports = {
     'react/state-in-constructor': 0,
     'import/prefer-default-export': 0,
     'max-len': [2, 250],
+    'no-param-reassign': [2, { props: false }],
     'no-multiple-empty-lines': [
       'error',
       {
