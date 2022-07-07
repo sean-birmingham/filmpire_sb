@@ -1,18 +1,11 @@
 import { useEffect } from 'react';
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  ListItemIcon,
-  Box,
-  CircularProgress,
-} from '@mui/material';
+import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
-import genreIcons from '../assets/genres';
+import { useDispatch, useSelector } from 'react-redux';
 
+import genreIcons from '../assets/genres';
+import { selectGenreOrCategory } from '../features/currentGenreOrCategory';
 import { useGetGenresQuery } from '../services/TMDB';
 
 const categories = [
@@ -49,27 +42,21 @@ const demoCategories = [
   },
 ];
 
-const blueLogo =
-  'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
+const blueLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
 
-const redLogo =
-  'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
+const redLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
 
 const Sidebar = ({ setMobileOpen }) => {
+  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+
   const theme = useTheme();
   const { data, isFetching } = useGetGenresQuery();
+  const dispatch = useDispatch();
 
   return (
     <>
-      <Link
-        to="/"
-        style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}
-      >
-        <img
-          src={theme.palette.mode === 'light' ? blueLogo : redLogo}
-          alt="Filmpire logo"
-          style={{ width: '70%' }}
-        />
+      <Link to="/" style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}>
+        <img src={theme.palette.mode === 'light' ? blueLogo : redLogo} alt="Filmpire logo" style={{ width: '70%' }} />
       </Link>
       <Divider />
       <List>
@@ -83,7 +70,7 @@ const Sidebar = ({ setMobileOpen }) => {
               color: theme.palette.text.primary,
             }}
           >
-            <ListItem button>
+            <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} height={30} />
               </ListItemIcon>
@@ -109,7 +96,7 @@ const Sidebar = ({ setMobileOpen }) => {
                 color: theme.palette.text.primary,
               }}
             >
-              <ListItem button>
+              <ListItem onClick={() => dispatch(selectGenreOrCategory(id))} button>
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} height={30} />
                 </ListItemIcon>

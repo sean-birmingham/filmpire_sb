@@ -1,19 +1,6 @@
 import { useState } from 'react';
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Drawer,
-  Button,
-  Avatar,
-  useMediaQuery,
-} from '@mui/material';
-import {
-  Menu,
-  AccountCircle,
-  Brightness4,
-  Brightness7,
-} from '@mui/icons-material';
+import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
+import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
 
@@ -44,13 +31,7 @@ const NavBar = () => {
           }}
         >
           {isMobile && (
-            <IconButton
-              color="inherit"
-              edge="start"
-              style={{ outline: 'none' }}
-              sx={{ mr: 2 }}
-              onClick={() => setMobileOpen((prevState) => !prevState)}
-            >
+            <IconButton color="inherit" edge="start" style={{ outline: 'none' }} sx={{ mr: 2 }} onClick={() => setMobileOpen((prevState) => !prevState)}>
               <Menu />
             </IconButton>
           )}
@@ -67,7 +48,7 @@ const NavBar = () => {
               <Button
                 color="inherit"
                 component={Link}
-                to={`/profile/:id`}
+                to="/profile/:id"
                 sx={{
                   '&:hover': {
                     color: 'white !important',
@@ -84,9 +65,7 @@ const NavBar = () => {
         </Toolbar>
       </AppBar>
       <div>
-        <nav
-          sx={{ [theme.breakpoints.up('sm')]: { width: 240, flexShrink: 0 } }}
-        >
+        <nav sx={{ [theme.breakpoints.up('sm')]: { width: 240, flexShrink: 0 } }}>
           {isMobile ? (
             <Drawer
               variant="temporary"
