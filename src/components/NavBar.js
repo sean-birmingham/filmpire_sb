@@ -1,20 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Sidebar from './Sidebar';
 import Search from './Search';
+import { fetchToken, moviesApi, createSessionId } from '../utils';
+import { setUser, userSelector } from '../features/auth';
 
 const drawerWidth = 240;
 
 const NavBar = () => {
+  const { isAuthenticated, user } = useSelector(userSelector);
   const [mobileOpen, setMobileOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
+  const dispatch = useDispatch();
 
-  const isAuthenticated = true;
+  const token = localStorage.getItem('request_token');
+  const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+
+  useEffect(() => {
+    const loginUser = async () => {
+      if (token) {
+        if (sessionIdFromLocalStorage) {
+          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
+
+          dispatch(setUser(userData));
+        } else {
+          const sessionId = await createSessionId();
+
+          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
+
+          dispatch(setUser(userData));
+        }
+      }
+    };
+
+    loginUser();
+  }, [token]);
 
   return (
     <>
@@ -42,14 +68,14 @@ const NavBar = () => {
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit">
+              <Button color="inherit" onClick={fetchToken}>
                 Login &nbsp; <AccountCircle />
               </Button>
             ) : (
               <Button
                 color="inherit"
                 component={Link}
-                to="/profile/:id"
+                to={`/profile/${user.id}`}
                 sx={{
                   '&:hover': {
                     color: 'white !important',
@@ -58,7 +84,7 @@ const NavBar = () => {
                 }}
               >
                 {!isMobile && <>My Movies &nbsp;</>}
-                <Avatar style={{ width: 30, height: 30 }} alt="Profile" />
+                <Avatar src={`https://www.gravatar.com/avatar/${user.avatar.gravatar.hash}`} style={{ width: 30, height: 30 }} alt="Profile" />
               </Button>
             )}
           </div>
