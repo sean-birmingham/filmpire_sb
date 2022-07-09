@@ -7,7 +7,9 @@ import MovieList from './MovieList';
 
 const Movies = () => {
   const [page, setpage] = useState(1);
-  const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
+  const { genreIdOrCategoryName, searchQuery } = useSelector(
+    (state) => state.currentGenreOrCategory,
+  );
   const { data, error, isFetching } = useGetMoviesQuery({
     genreIdOrCategoryName,
     page,

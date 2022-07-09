@@ -1,4 +1,13 @@
-import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
+import {
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListSubheader,
+  ListItemIcon,
+  Box,
+  CircularProgress,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
 import { useDispatch } from 'react-redux';
@@ -22,9 +31,11 @@ const categories = [
   },
 ];
 
-const blueLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
+const blueLogo =
+  'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
 
-const redLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
+const redLogo =
+  'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -33,8 +44,15 @@ const Sidebar = () => {
 
   return (
     <>
-      <Link to="/" style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}>
-        <img src={theme.palette.mode === 'light' ? blueLogo : redLogo} alt="Filmpire logo" style={{ width: '70%' }} />
+      <Link
+        to="/"
+        style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}
+      >
+        <img
+          src={theme.palette.mode === 'light' ? blueLogo : redLogo}
+          alt="Filmpire logo"
+          style={{ width: '70%' }}
+        />
       </Link>
       <Divider />
       <List>
@@ -48,7 +66,10 @@ const Sidebar = () => {
               color: theme.palette.text.primary,
             }}
           >
-            <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
+            <ListItem
+              onClick={() => dispatch(selectGenreOrCategory(value))}
+              button
+            >
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} height={30} />
               </ListItemIcon>
@@ -74,7 +95,10 @@ const Sidebar = () => {
                 color: theme.palette.text.primary,
               }}
             >
-              <ListItem onClick={() => dispatch(selectGenreOrCategory(id))} button>
+              <ListItem
+                onClick={() => dispatch(selectGenreOrCategory(id))}
+                button
+              >
                 <ListItemIcon>
                   <img src={genreIcons[name.toLowerCase()]} height={30} />
                 </ListItemIcon>

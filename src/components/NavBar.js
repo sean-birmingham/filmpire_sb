@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react';
-import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
-import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Drawer,
+  Button,
+  Avatar,
+  useMediaQuery,
+} from '@mui/material';
+import {
+  Menu,
+  AccountCircle,
+  Brightness4,
+  Brightness7,
+} from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,13 +39,17 @@ const NavBar = () => {
     const loginUser = async () => {
       if (token) {
         if (sessionIdFromLocalStorage) {
-          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionIdFromLocalStorage}`);
+          const { data: userData } = await moviesApi.get(
+            `/account?session_id=${sessionIdFromLocalStorage}`,
+          );
 
           dispatch(setUser(userData));
         } else {
           const sessionId = await createSessionId();
 
-          const { data: userData } = await moviesApi.get(`/account?session_id=${sessionId}`);
+          const { data: userData } = await moviesApi.get(
+            `/account?session_id=${sessionId}`,
+          );
 
           dispatch(setUser(userData));
         }
@@ -58,7 +75,13 @@ const NavBar = () => {
           }}
         >
           {isMobile && (
-            <IconButton color="inherit" edge="start" style={{ outline: 'none' }} sx={{ mr: 2 }} onClick={() => setMobileOpen((prevState) => !prevState)}>
+            <IconButton
+              color="inherit"
+              edge="start"
+              style={{ outline: 'none' }}
+              sx={{ mr: 2 }}
+              onClick={() => setMobileOpen((prevState) => !prevState)}
+            >
               <Menu />
             </IconButton>
           )}
@@ -84,7 +107,11 @@ const NavBar = () => {
                 }}
               >
                 {!isMobile && <>My Movies &nbsp;</>}
-                <Avatar src={`https://www.gravatar.com/avatar/${user.avatar.gravatar.hash}`} style={{ width: 30, height: 30 }} alt="Profile" />
+                <Avatar
+                  src={`https://www.gravatar.com/avatar/${user.avatar.gravatar.hash}`}
+                  style={{ width: 30, height: 30 }}
+                  alt="Profile"
+                />
               </Button>
             )}
           </div>
@@ -92,7 +119,9 @@ const NavBar = () => {
         </Toolbar>
       </AppBar>
       <div>
-        <nav sx={{ [theme.breakpoints.up('sm')]: { width: 240, flexShrink: 0 } }}>
+        <nav
+          sx={{ [theme.breakpoints.up('sm')]: { width: 240, flexShrink: 0 } }}
+        >
           {isMobile ? (
             <Drawer
               variant="temporary"
