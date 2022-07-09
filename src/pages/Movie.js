@@ -6,15 +6,7 @@ const Movie = ({ movie, idx }) => {
   const theme = useTheme();
 
   return (
-    <Grid
-      item
-      xs={12}
-      sm={6}
-      md={4}
-      lg={3}
-      xl={2}
-      sx={{ padding: '10px', textAlign: 'center' }}
-    >
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} sx={{ padding: '10px', textAlign: 'center' }}>
       <Grow in key={idx} timeout={(idx + 1) * 250}>
         <Link
           to={`/movie/${movie.id}`}

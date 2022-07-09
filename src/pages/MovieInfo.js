@@ -35,8 +35,10 @@ const MovieInfo = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const { data: recommendations, isFetching: isRecommendationsFetching } =
-    useGetRecommendationsQuery({ list: '/recommendations', movieId: id });
+  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({
+    list: '/recommendations',
+    movieId: id,
+  });
 
   const isMovieFav = false;
   const isMovieWatchListed = false;
@@ -65,14 +67,7 @@ const MovieInfo = () => {
         margin: '10px 0 !important',
       }}
     >
-      <Grid
-        item
-        sm={12}
-        lg={4}
-        display="flex"
-        justifyContent="center"
-        alignItems="start"
-      >
+      <Grid item sm={12} lg={4} display="flex" justifyContent="center" alignItems="start">
         <Box
           component="img"
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
@@ -115,11 +110,7 @@ const MovieInfo = () => {
         >
           <Box display="flex" justifyContent="center">
             <Rating readOnly value={data?.vote_average / 2} />
-            <Typography
-              variant="subtitle1"
-              gutterBottom
-              style={{ marginLeft: '10px' }}
-            >
+            <Typography variant="subtitle1" gutterBottom style={{ marginLeft: '10px' }}>
               {data?.vote_average} / 10
             </Typography>
           </Box>
@@ -170,9 +161,7 @@ const MovieInfo = () => {
         <Typography variant="h5" gutterBottom style={{ marginTop: '10px' }}>
           Overview
         </Typography>
-        <Typography style={{ marginBottom: '2rem' }}>
-          {data?.overview}
-        </Typography>
+        <Typography style={{ marginBottom: '2rem' }}>{data?.overview}</Typography>
         <Typography variant="h5" gutterBottom>
           Top Cast
         </Typography>
@@ -197,12 +186,8 @@ const MovieInfo = () => {
                         alt={character.name}
                         sx={{ width: '100%', borderRadius: '10px' }}
                       />
-                      <Typography color="textPrimary">
-                        {character?.name}
-                      </Typography>
-                      <Typography color="textSecondary">
-                        {character.character.split('/')[0]}
-                      </Typography>
+                      <Typography color="textPrimary">{character?.name}</Typography>
+                      <Typography color="textSecondary">{character.character.split('/')[0]}</Typography>
                     </Grid>
                   ),
               )
@@ -221,12 +206,7 @@ const MovieInfo = () => {
           >
             <Grid item xs={12} sm={6}>
               <ButtonGroup size="medium" variant="outlined">
-                <Button
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={data?.homepage}
-                  endIcon={<Language />}
-                >
+                <Button target="_blank" rel="noopener noreferrer" href={data?.homepage} endIcon={<Language />}>
                   Website
                 </Button>
                 <Button
@@ -244,24 +224,13 @@ const MovieInfo = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <ButtonGroup size="medium" variant="outlined">
-                <Button
-                  onClick={addToFavorites}
-                  endIcon={
-                    isMovieFav ? <FavoriteBorderOutlined /> : <Favorite />
-                  }
-                >
+                <Button onClick={addToFavorites} endIcon={isMovieFav ? <FavoriteBorderOutlined /> : <Favorite />}>
                   {isMovieFav ? 'Unfavorite' : 'Favorite'}
                 </Button>
-                <Button
-                  onClick={addToWatchList}
-                  endIcon={isMovieWatchListed ? <Remove /> : <PlusOne />}
-                >
+                <Button onClick={addToWatchList} endIcon={isMovieWatchListed ? <Remove /> : <PlusOne />}>
                   Watchlist
                 </Button>
-                <Button
-                  endIcon={<ArrowBack />}
-                  sx={{ borderColor: 'primary.main' }}
-                >
+                <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
                   <Typography
                     component={Link}
                     to="/"
