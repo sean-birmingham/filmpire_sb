@@ -3,6 +3,7 @@ import { TextField, InputAdornment, Box } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { useTheme } from '@mui/system';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { searchMovie } from '../features/currentGenreOrCategory';
 
@@ -11,10 +12,12 @@ const Search = () => {
 
   const theme = useTheme();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       dispatch(searchMovie(query));
+      navigate('/');
     }
   };
 

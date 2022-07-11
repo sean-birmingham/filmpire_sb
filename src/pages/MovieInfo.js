@@ -1,15 +1,5 @@
 import { useState } from 'react';
-import {
-  Modal,
-  Typography,
-  Button,
-  ButtonGroup,
-  Grid,
-  Box,
-  CircularProgress,
-  useMediaQuery,
-  Rating,
-} from '@mui/material';
+import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, Rating } from '@mui/material';
 import {
   Movie as MovieIcon,
   Theaters,
@@ -21,9 +11,8 @@ import {
   ArrowBack,
 } from '@mui/icons-material';
 import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/system';
-import axios from 'axios';
 
 import { useGetMovieQuery, useGetRecommendationsQuery } from '../services/TMDB';
 import { selectGenreOrCategory } from '../features/currentGenreOrCategory';
@@ -38,7 +27,7 @@ const MovieInfo = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const { data: recommendations, isFetching: isRecommendationsFetching } = useGetRecommendationsQuery({
+  const { data: recommendations } = useGetRecommendationsQuery({
     list: '/recommendations',
     movieId: id,
   });
@@ -259,31 +248,33 @@ const MovieInfo = () => {
           <Box>Sorry nothing was found.</Box>
         )}
       </Box>
-      <Modal
-        closeAfterTransition
-        open={open}
-        onClose={() => setOpen(false)}
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        {data?.videos?.results?.length > 0 && (
-          <Box
-            component="iframe"
-            autoPlay
-            frameBorder="0"
-            title="Trailer"
-            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
-            allow="autoplay"
-            sx={{
-              width: '50%',
-              height: '50%',
-              [theme.breakpoints.down('sm')]: {
-                width: '90%',
-                height: '90%',
-              },
-            }}
-          />
-        )}
-      </Modal>
+      {data?.videos && (
+        <Modal
+          closeAfterTransition
+          open={open}
+          onClose={() => setOpen(false)}
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          {data?.videos?.results?.length > 0 && (
+            <Box
+              component="iframe"
+              autoPlay
+              frameBorder="0"
+              title="Trailer"
+              src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+              allow="autoplay"
+              sx={{
+                width: '50%',
+                height: '50%',
+                [theme.breakpoints.down('sm')]: {
+                  width: '90%',
+                  height: '90%',
+                },
+              }}
+            />
+          )}
+        </Modal>
+      )}
     </Grid>
   );
 };
