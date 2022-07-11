@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Modal,
   Typography,
@@ -30,6 +31,8 @@ import genreIcons from '../assets/genres';
 import MovieList from './MovieList';
 
 const MovieInfo = () => {
+  const [open, setOpen] = useState(false);
+
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const theme = useTheme();
@@ -217,7 +220,7 @@ const MovieInfo = () => {
                 >
                   IMDB
                 </Button>
-                <Button href="#" endIcon={<Theaters />}>
+                <Button href="#" endIcon={<Theaters />} onClick={() => setOpen(true)}>
                   Trailer
                 </Button>
               </ButtonGroup>
@@ -256,6 +259,31 @@ const MovieInfo = () => {
           <Box>Sorry nothing was found.</Box>
         )}
       </Box>
+      <Modal
+        closeAfterTransition
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <Box
+            component="iframe"
+            autoPlay
+            frameBorder="0"
+            title="Trailer"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow="autoplay"
+            sx={{
+              width: '50%',
+              height: '50%',
+              [theme.breakpoints.down('sm')]: {
+                width: '90%',
+                height: '90%',
+              },
+            }}
+          />
+        )}
+      </Modal>
     </Grid>
   );
 };
