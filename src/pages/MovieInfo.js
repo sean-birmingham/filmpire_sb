@@ -15,7 +15,8 @@ import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/system';
 
 import { useGetMovieQuery, useGetRecommendationsQuery } from '../services/TMDB';
-import { selectGenreOrCategory } from '../features/currentGenreOrCategory';
+import { selectGenreOrCategory, selectPage } from '../features/movieSlice';
+
 import genreIcons from '../assets/genres';
 import MovieList from './MovieList';
 
@@ -59,7 +60,7 @@ const MovieInfo = () => {
         margin: '10px 0 !important',
       }}
     >
-      <Grid item sm={12} lg={4} display="flex" justifyContent="center" alignItems="start">
+      <Grid item sm={12} lg={4} display="flex" justifyContent="center" alignItems="start" marginBottom="30px">
         <Box
           component="img"
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}`}
@@ -68,20 +69,14 @@ const MovieInfo = () => {
             borderRadius: '20px',
             boxShadow: '0.5em 1em 1em rgb(64,64,70)',
             width: '80%',
-            [theme.breakpoints.down('lg')]: {
-              marginBottom: '30px',
-            },
             [theme.breakpoints.down('md')]: {
               margin: '0 auto',
               width: '50%',
-              height: '350px',
-              marginBottom: '30px',
             },
             [theme.breakpoints.down('sm')]: {
               margin: '0 auto',
               width: '100%',
               height: '350px',
-              marginBottom: '30px',
             },
           }}
         />
@@ -107,7 +102,7 @@ const MovieInfo = () => {
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
-            {data?.runtime} min /{' '}
+            {data?.runtime} min | {data?.spoken_languages.length > 1 ? 'Languages' : 'Language'}: &nbsp;
             {data?.spoken_languages
               .map((language) => language.name)
               .join(', ')
@@ -171,6 +166,7 @@ const MovieInfo = () => {
                       component={Link}
                       to={`/actors/${character.id}`}
                       style={{ textDecoration: 'none' }}
+                      onClick={() => dispatch(selectPage(1))}
                     >
                       <Box
                         component="img"

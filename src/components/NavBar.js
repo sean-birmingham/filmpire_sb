@@ -8,14 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import { fetchToken, moviesApi, createSessionId } from '../utils';
-import { setUser, userSelector } from '../features/auth';
+import { setUser, userSelector } from '../features/authSlice';
 
 const drawerWidth = 240;
 
 const NavBar = () => {
   const { isAuthenticated, user } = useSelector(userSelector);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:1000px)');
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ const NavBar = () => {
             display: 'flex',
             justifyContent: 'space-between',
             marginLeft: '240px',
-            [theme.breakpoints.down('sm')]: {
+            [theme.breakpoints.down('md')]: {
               marginLeft: 0,
               flexWrap: 'wrap',
             },

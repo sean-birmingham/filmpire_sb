@@ -23,9 +23,6 @@ export const tmdbApi = createApi({
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
           return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`;
         }
-
-        //* Get Popular Movies
-        return `movie/popular?page=${page}&api_key=${tmdbApiKey}`;
       },
     }),
     //* Get Movie

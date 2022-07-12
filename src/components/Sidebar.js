@@ -13,7 +13,7 @@ import { useTheme } from '@mui/system';
 import { useDispatch } from 'react-redux';
 
 import genreIcons from '../assets/genres';
-import { selectGenreOrCategory } from '../features/currentGenreOrCategory';
+import { selectGenreOrCategory } from '../features/movieSlice';
 import { useGetGenresQuery } from '../services/TMDB';
 
 const categories = [

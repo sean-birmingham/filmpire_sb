@@ -5,7 +5,7 @@ import { useTheme } from '@mui/system';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { searchMovie } from '../features/currentGenreOrCategory';
+import { searchMovie } from '../features/movieSlice';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -17,6 +17,7 @@ const Search = () => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       dispatch(searchMovie(query));
+      setQuery('');
       navigate('/');
     }
   };
@@ -33,6 +34,7 @@ const Search = () => {
     >
       <TextField
         onKeyPress={handleKeyPress}
+        value={query}
         onChange={(e) => setQuery(e.target.value)}
         variant="standard"
         sx={{

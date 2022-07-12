@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from '@mui/material';
 import { ExitToApp } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../features/auth';
+import { userSelector } from '../features/authSlice';
 
 const Profile = () => {
   const { user } = useSelector(userSelector);

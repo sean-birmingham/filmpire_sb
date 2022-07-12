@@ -13,7 +13,7 @@ const App = () => (
   <div style={{ display: 'flex', height: '100%' }}>
     <CssBaseline />
     <NavBar />
-    <main style={{ flexGrow: 1, padding: '2em' }}>
+    <main style={{ flexGrow: 1, padding: '2em', width: '100%' }}>
       <div style={{ height: '70px' }} />
       <Routes>
         <Route path="/" element={<Movies />} />

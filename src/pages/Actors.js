@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { Box, Button, CircularProgress, Grid, Pagination, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { useGetActorQuery, useGetMoviesByActorIdQuery } from '../services/TMDB';
 import MovieList from './MovieList';
 import PageChange from '../components/PageChange';
 
 const Actors = () => {
-  const [page, setPage] = useState(1);
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { page } = useSelector((state) => state.movies);
   const { data, isFetching, error } = useGetActorQuery(id);
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
 
@@ -75,7 +75,7 @@ const Actors = () => {
           Movies
         </Typography>
         {movies && <MovieList movies={movies} numberOfMovies={12} />}
-        <PageChange page={page} setPage={setPage} count={movies?.total_pages} />
+        <PageChange page={page} count={movies?.total_pages} />
       </Box>
     </>
   );
