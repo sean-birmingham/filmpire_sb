@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Pagination, Typography } from '@mui/material';
 import { useSelector } from 'react-redux/';
 
 import { useGetMoviesQuery } from '../services/TMDB';
 import MovieList from './MovieList';
+import PageChange from '../components/PageChange';
 
 const Movies = () => {
-  const [page, setpage] = useState(1);
+  const [page, setPage] = useState(1);
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
   const { data, error, isFetching } = useGetMoviesQuery({
     genreIdOrCategoryName,
@@ -35,7 +36,12 @@ const Movies = () => {
 
   if (error) return 'An error has occured.';
 
-  return <MovieList movies={data} />;
+  return (
+    <div>
+      <MovieList movies={data} />
+      <PageChange page={page} setPage={setPage} count={500} />
+    </div>
+  );
 };
 
 export default Movies;
