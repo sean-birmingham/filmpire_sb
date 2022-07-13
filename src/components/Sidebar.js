@@ -59,7 +59,11 @@ const Sidebar = () => {
           >
             <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
               <ListItemIcon>
-                <img src={genreIcons[label.toLowerCase()]} height={30} />
+                <img
+                  src={genreIcons[label.toLowerCase()]}
+                  height={30}
+                  style={{ filter: theme.palette.mode === 'dark' ? 'invert(1)' : '' }}
+                />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
@@ -85,7 +89,11 @@ const Sidebar = () => {
             >
               <ListItem onClick={() => dispatch(selectGenreOrCategory(id))} button>
                 <ListItemIcon>
-                  <img src={genreIcons[name.toLowerCase()]} height={30} />
+                  <img
+                    src={genreIcons[name.toLowerCase()]}
+                    height={30}
+                    style={{ filter: theme.palette.mode === 'dark' ? 'invert(1)' : '' }}
+                  />
                 </ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
