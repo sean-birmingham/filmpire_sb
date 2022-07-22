@@ -24,6 +24,7 @@ const App = () => {
         <div style={{ height: '70px' }} />
         <Routes>
           <Route path="/" element={<Movies />} />
+          <Route path="/approved" element={<Movies />} />
           <Route path="/movie/:id" element={<MovieInfo />} />
           <Route path="/actors/:id" element={<Actors />} />
           <Route path="/profile/:id" element={<Profile />} />
