@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const FeaturedMovie = ({ movie }) => {
   const theme = useTheme();
 
-  if (!movie) return null;
+  if (!movie?.backdrop_path && !movie?.poster_path) return null;
 
   return (
     <Box
@@ -25,7 +25,9 @@ const FeaturedMovie = ({ movie }) => {
         <CardMedia
           media="picture"
           alt={movie.title}
-          image={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+          image={`https://image.tmdb.org/t/p/original/${
+            movie?.backdrop_path ? movie?.backdrop_path : movie?.poster_path
+          }`}
           sx={{
             position: 'absolute',
             top: 0,

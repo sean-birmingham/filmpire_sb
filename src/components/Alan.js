@@ -39,6 +39,7 @@ const useAlan = () => {
           localStorage.clear();
           navigate('/');
         } else if (command === 'search') {
+          navigate('/');
           dispatch(searchMovie(query));
         }
       },

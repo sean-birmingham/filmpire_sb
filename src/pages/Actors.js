@@ -16,17 +16,21 @@ const Actors = () => {
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
 
   if (isFetching) {
-    <Box display="flex" justifyContent="center">
-      <CircularProgress size="8rem" />
-    </Box>;
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="4rem" />
+      </Box>
+    );
   }
 
   if (error) {
-    <Box display="flex" justifyContent="center">
-      <Button startIcon={<ArrowBack />} onclick={() => navigate(-1)}>
-        Go back
-      </Button>
-    </Box>;
+    return (
+      <Box display="flex" justifyContent="center">
+        <Button startIcon={<ArrowBack />} onclick={() => navigate(-1)}>
+          Go back
+        </Button>
+      </Box>
+    );
   }
 
   return (

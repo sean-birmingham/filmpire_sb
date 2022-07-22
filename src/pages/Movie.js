@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const Movie = ({ movie, idx }) => {
   const theme = useTheme();
 
+  if (!movie.poster_path) return null;
+
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} sx={{ padding: '10px', textAlign: 'center' }}>
       <Grow in key={idx} timeout={(idx + 1) * 250}>
@@ -15,15 +17,7 @@ const Movie = ({ movie, idx }) => {
             textDecoration: 'none',
           }}
         >
-          <img
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : 'https://www.fillmurray.com/200/300'
-            }
-            alt={movie.title}
-            className="movie-img"
-          />
+          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="movie-img" />
           <Typography
             variant="h6"
             sx={{

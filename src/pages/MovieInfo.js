@@ -79,15 +79,19 @@ const MovieInfo = () => {
   };
 
   if (isFetching) {
-    <Box display="flex" justifyContent="center">
-      <CircularProgress size="8rem" />
-    </Box>;
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="4rem" />
+      </Box>
+    );
   }
 
   if (error) {
-    <Box display="flex" justifyContent="center">
-      <Link to="/">Something has gone wrong. Go back.</Link>
-    </Box>;
+    return (
+      <Box display="flex" justifyContent="center">
+        <Link to="/">Something has gone wrong. Go back.</Link>
+      </Box>
+    );
   }
 
   return (
