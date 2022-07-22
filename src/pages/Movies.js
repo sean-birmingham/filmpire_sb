@@ -25,7 +25,7 @@ const Movies = () => {
     );
   }
 
-  if (!data.results.length) {
+  if (!data?.results.length) {
     return (
       <Box display="flex" alignItems="center" mt="20px">
         <Typography variant="h4">
@@ -40,7 +40,7 @@ const Movies = () => {
 
   return (
     <div>
-      <FeaturedMovie movie={data.results[0]} />
+      <FeaturedMovie movie={data?.results[0]} />
       <MovieList movies={data} numberOfMovies={numberOfMovies} excludeFirst />
       <PageChange page={page} count={data.total_pages < 500 ? data?.total_pages : 500} />
     </div>

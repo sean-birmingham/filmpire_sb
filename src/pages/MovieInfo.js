@@ -295,7 +295,7 @@ const MovieInfo = () => {
               autoPlay
               frameBorder="0"
               title="Trailer"
-              src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+              src={`https://www.youtube.com/embed/${data?.videos.results[0].key}`}
               allow="autoplay"
               sx={{
                 width: '50%',
