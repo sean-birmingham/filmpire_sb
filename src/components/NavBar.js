@@ -94,7 +94,7 @@ const NavBar = () => {
               >
                 {!isMobile && <>My Movies &nbsp;</>}
                 <Avatar
-                  src={`https://www.gravatar.com/avatar/${user.avatar.gravatar.hash}`}
+                  src={`https://www.gravatar.com/avatar/${user?.avatar?.gravatar?.hash}.jpg?s=300`}
                   style={{ width: 30, height: 30 }}
                   alt="Profile"
                 />
